@@ -9,7 +9,7 @@
 body {
     margin: 0;
     padding: 0;
-    height: 100vh;
+    min-height: 100vh;
     font-family: 'Roboto', sans-serif;
     display: flex;
     justify-content: center;
@@ -20,64 +20,73 @@ body {
 
 .tarjeta {
     text-align: center;
-    background: rgba(255,255,255,0.85);
-    padding: 40px;
-    border-radius: 25px;
+    background: rgba(255,255,255,0.9);
+    padding: 5vw;
+    border-radius: 2rem;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     max-width: 500px;
+    width: 90%;
     position: relative;
     z-index: 10;
+    word-wrap: break-word;
 }
 
 .tarjeta h1 {
     font-family: 'Pacifico', cursive;
-    font-size: 3rem;
-    margin-bottom: 15px;
+    font-size: 6vw;
+    margin-bottom: 2vw;
     color: #ff6f91;
 }
 
 #mensajes {
-    margin-top: 20px;
+    margin-top: 2vw;
 }
 
 button {
-    padding: 12px 25px;
-    font-size: 1rem;
+    padding: 3vw 6vw;
+    font-size: 1.2rem;
     border: none;
-    border-radius: 10px;
+    border-radius: 1rem;
     cursor: pointer;
     background: #ff6f91;
     color: #fff;
     transition: transform 0.2s;
     font-weight: bold;
-    margin-top: 20px;
+    margin-top: 2vw;
 }
 
 button:hover { transform: scale(1.05); }
 
 .globo {
     position: absolute;
-    font-size: 2rem;
+    font-size: 5vw;
     opacity: 0.9;
     pointer-events: none;
 }
 
 .confeti {
     position: absolute;
-    width: 8px;
-    height: 8px;
+    width: 1.5vw;
+    height: 1.5vw;
     border-radius: 50%;
     opacity: 0.8;
     pointer-events: none;
 }
 
 .mensaje-dinamico {
-    font-size: 1.2rem;
+    font-size: 4vw;
     color: #ff6f91;
-    margin: 10px 0;
+    margin: 1vw 0;
     display: block;
     opacity: 0;
     transition: opacity 1s;
+}
+
+@media (min-width: 600px){
+    .tarjeta h1 { font-size: 3rem; }
+    .mensaje-dinamico { font-size: 1.2rem; }
+    .confeti { width: 8px; height: 8px; }
+    .globo { font-size: 2rem; }
 }
 </style>
 </head>
@@ -129,13 +138,13 @@ function crearGlobo(){
     let left = Math.random()*90;
     let posY = window.innerHeight + 50;
     let velY = 1 + Math.random()*1.5;
-    let velX = Math.random()*2 - 1; // dirección horizontal
+    let velX = Math.random()*2 - 1;
     body.appendChild(globo);
 
     function animar(){
         posY -= velY;
         left += velX;
-        if(left <= 0 || left >= 90) velX *= -1; // rebote horizontal
+        if(left <= 0 || left >= 90) velX *= -1;
         globo.style.bottom = posY + "px";
         globo.style.left = left + "%";
         if(posY > -50) requestAnimationFrame(animar);
@@ -152,7 +161,7 @@ function crearConfeti(){
     let left = Math.random()*100;
     let posY = -10;
     let velY = 1 + Math.random()*3;
-    let velX = Math.random()*1.5 - 0.75; // vaivén horizontal
+    let velX = Math.random()*1.5 - 0.75;
     body.appendChild(c);
 
     function animar(){
@@ -169,8 +178,8 @@ function crearConfeti(){
 
 // Repetición continua para mantener todo dinámico
 function iniciarAnimacion(){
-    setInterval(crearGlobo, 200); // cada 0.2s un globo
-    setInterval(crearConfeti, 50); // cada 0.05s confeti
+    setInterval(crearGlobo, 150); // cada 0.15s un globo
+    setInterval(crearConfeti, 40); // cada 0.04s confeti
 }
 </script>
 </body>
